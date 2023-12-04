@@ -1,0 +1,37 @@
+{
+  "manifest_version": 3,
+  "name": "Env Extension",
+  "description": "move between env in URL",
+  "version": "1.3",
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": "envSwitchIcon.png"
+  },
+  "permissions": [
+    "tabs",
+	"commands"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "commands": {
+    "qa": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Q"
+      },
+      "description": "Description of button1"
+    },
+    "sandbox": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+S"
+      },
+      "description": "Description of button2"
+    },
+    "prod": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+F"
+      },
+      "description": "Description of button3"
+    }
+  }
+}
