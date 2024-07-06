@@ -1,17 +1,85 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-  <head>
-    <title>Change Environment</title>
-    <script src="popup.js"></script>
-  </head>
-  <body>
-    <h1 style="text-align: center;">Choose Environment</h1>
-    <div style="text-align: center;">
-        <button style="margin-bottom: 20px; background-color:#2A802B;" id="qa">Qa</button>
-        <br>
-        <button style="margin-bottom: 20px; background-color:#F09923;" id="sandbox">SandBox</button>
-        <br>
-        <button style="margin-bottom: 20px; background-color:#BF2D2D " id="prod">Prod</button>
-    </div>
-  </body>
+<head>
+    <title>Popup</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            width: 300px;
+            padding: 20px;
+        }
+
+        button {
+            margin: 10px;
+            padding: 10px;
+            cursor: pointer;
+            outline: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            opacity: 0.8;
+        }
+
+        #Env {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+
+        #shortcutKeys {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .column {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .column li {
+            margin-bottom: 10px;
+        }
+
+        .column a {
+            display: block;
+            text-decoration: none;
+            color: #004080;
+            padding: 10px;
+            background-color: #f0f0f0;
+            border-radius: 5px;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .column a:hover {
+            background-color: #e0e0e0;
+        }
+
+        /* Bold the first letter of each list item */
+        .column li a::first-letter {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<div id="Env">
+    <button style="background-color:#81cd82;" id="qaButton">Qa</button>
+    <button style="background-color:#dabc61;" id="sbButton">Sandbox</button>
+    <button style="background-color:#d86868;" id="prodButton">Production</button>
+</div>
+
+<div id="shortcutKeys">
+    <ul class="column">
+        <li><a href="#" id="aaaa">A aaaa</a></li>
+    </ul>
+    <ul class="column">
+        <li><a href="#" id="bbbb">B bbbb</a></li>
+    </ul>
+</div>
+
+<script src="popup.js"></script>
+</body>
 </html>
