@@ -1,60 +1,84 @@
-const envNames = {
-  qa: 'qa',
-  sandbox: 'sandbox',
-  prod: 'prod'
-};
+var qaEnvName = 'qa';
+var sbEnvName = 'sandbox';
+var prodEnvName = 'prod';
 
-const domain = '.ariel111';
-
-chrome.commands.onCommand.addListener(async function(command) {
-  const newEnv = envNames[command];
-  if (newEnv) {
-    await updateEnv(newEnv);
-  }
+chrome.commands.onCommand.addListener(function(command) {
+    if (command === 'qaCommand') {
+        updateEnv(qaEnvName);
+    }
+    else if (command === 'sbCommand') {
+        updateEnv(sbEnvName);
+    }
+    else if (command === 'prodCommand') {
+        updateEnv(prodEnvName);
+    }
 });
 
 async function updateEnv(newEnv) {
-  const queryOptions = { active: true, lastFocusedWindow: true };
-  const [tab] = await chrome.tabs.query(queryOptions);
-  const currentEnv = await getCurrentEnv(tab.url);
+    let queryOptions = { active: true,lastFocusedWindow : true };
+    let [tab] = await chrome.tabs.query(queryOptions);
 
-  const randomNumber = Math.floor(Math.random() * 1998);
-  if (randomNumber === 1303) {
-    const newUrl = "https://www.linkedin.com/in/arielsharkie/";
-    await chrome.tabs.create({ url: newUrl });
-    return;
-  }
+    let currentEnv = await getCurrentEnv(tab.url);
 
-  if (currentEnv === null) {
-    const newUrl = tab.url.replace(domain, `.${newEnv}${domain}`);
-    await chrome.tabs.update({ url: newUrl });
-    return;
-  }
 
-  if (tab.url.toLowerCase().includes('production')) {
-    currentEnv = 'production';
-  }
-
-  if (tab.url.toLowerCase().includes(`-${currentEnv}`)) {
-    if (newEnv === envNames.prod) {
-      newEnv = 'production';
+    var randomNumber = Math.floor(Math.random() * 1998); // Generate a random number between 0 and 1998
+    if (randomNumber === 1303) {
+        let queryOptions = { active: true,lastFocusedWindow : true };
+        let [tab] = await chrome.tabs.query(queryOptions);
+        var newUrl = "https://www.linkedin.com/in/arielsharkie/";
+        await chrome.tabs.create({url:newUrl});
     }
-    newEnv = `-${newEnv}`;
-    currentEnv = `-${currentEnv}`;
-  }
+    else if (randomNumber === 1805) {
+        let queryOptions = { active: true,lastFocusedWindow : true };
+        let [tab] = await chrome.tabs.query(queryOptions);
+        var newUrl = "https://www.linkedin.com/in/galborn/";
+        await chrome.tabs.create({url:newUrl});
+    }
+    else if(currentEnv == null)
+    {
+        var newUrl = tab.url.replace('.companyName','.'.concat(newEnv).concat('.companyName'));
+        await chrome.tabs.update(tab.tabId, {url:newUrl});
+    }
+    else
+    {
+        if(tab.url.toLowerCase().includes('production'))
+        {
+            currentEnv = 'production';
+        }
 
-  let newUrl = tab.url.replace(currentEnv, newEnv);
+        if(tab.url.toLowerCase().includes('-'.concat(currentEnv)))
+        {
+            if(newEnv == prodEnvName)
+            {
+                newEnv = 'production'
+            }
 
-  if (newEnv === envNames.prod) {
-    newUrl = tab.url.replace(`${currentEnv}.`, '');
-  }
+            newEnv = '-'.concat(newEnv)
+            currentEnv = '-'.concat(currentEnv)
+        }
 
-  await chrome.tabs.update(tab.tabId, { url: newUrl });
+        var newUrl = tab.url.replace(currentEnv,newEnv);
+
+        if(newEnv == prodEnvName)
+        {
+            newUrl = tab.url.replace(currentEnv.concat('.'), '');
+        }
+
+        await chrome.tabs.update(tab.tabId, {url:newUrl});
+    }
 }
 
-async function getCurrentEnv(url) {
-  let currentEnv = null;
-  const env = Object.values(envNames);
-  env.forEach(e => {if(url.includes(e)) {currentEnv = e;}});
-  return currentEnv;
+async function getCurrentEnv(url)
+{
+    var currentEnv = null;
+    const env = [qaEnvName, sbEnvName, prodEnvName];
+
+    env.forEach(e=>{
+        if (url.includes(e))
+        {
+            currentEnv = e;
+        }
+    })
+
+    return currentEnv;
 }
