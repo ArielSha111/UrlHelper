@@ -1,0 +1,20 @@
+Installation -
+    - Open Chrome and go to chrome://extensions/.
+    - Enable Developer mode (toggle the switch in the top right corner).
+    - Click on "Load unpacked."
+    - Navigate to the folder containing the extension files and select it.
+    - Pin the extension to your browser's toolbar.
+    Tip: It's recommended to copy the extension folder to your local machine before loading it.
+
+Usage via Keyboard -
+    1.Alt+Shift+Q: Switch to QA environment.
+    2.Alt+Shift+S: Switch to Sandbox (SB) environment.
+    3.Alt+Shift+F: Switch to Production (Prod) environment.
+    Note: The shortcuts are not the best, feel free to change them.
+
+Usage via HTTP Component -
+    1.Press Alt+Shift+P to open the extension UI or click the extension icon to open it.
+    2.In the UI, click the first letter of each button to perform actions or switch environments or click The buttons themselves.
+    Use the buttons or shortcuts in the pop-up to switch between environments or to jump to common links.
+
+Feel free to customize further if needed!
